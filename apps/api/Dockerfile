@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM --platform=linux/amd64 node:18-alpine AS base
 # for turbo - https://turbo.build/repo/docs/handbook/deploying-with-docker#example
 RUN apk add --no-cache libc6-compat
 RUN apk update
