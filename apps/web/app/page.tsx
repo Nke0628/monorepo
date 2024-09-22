@@ -1,11 +1,50 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { useEffect, useState } from "react";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export default function Home() {
+  const [videoUrl, setVideoUrl] = useState("");
+  useEffect(() => {
+    const fetchVideo = async () => {
+      const client = new S3Client({
+        region: "us-east-1",
+        credentials: {
+          accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_ID as string,
+          secretAccessKey: process.env.NEXT_PUBLIC_AWS_ACCESS_SECRET as string,
+        },
+      });
+      const command = new GetObjectCommand({
+        Bucket: "nk0628-monorepo",
+        Key: "sample-video.mp4",
+      });
+      try {
+        const signedUrl = await getSignedUrl(client, command, {
+          expiresIn: 3600,
+        });
+        setVideoUrl(signedUrl);
+      } catch (err) {
+        throw new Error("動画が取得できませんでした");
+      }
+    };
+    fetchVideo();
+  }, []);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <div>
+          {videoUrl && (
+            <video width="100%" controls>
+              <source src={videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
         <Image
           className={styles.logo}
           src="/next.svg"
