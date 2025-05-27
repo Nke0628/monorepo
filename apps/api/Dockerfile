@@ -21,7 +21,7 @@ ARG APP_NAME="api"
 ENV APP_NAME=${APP_NAME}
 WORKDIR /workspace
 COPY . .
-RUN pnpm install --frozen-lockfile --offline --silent
+RUN pnpm install
 # build app
 RUN pnpm turbo run build --filter=${APP_NAME}
 RUN pnpm --filter ${APP_NAME} deploy --prod ./out
