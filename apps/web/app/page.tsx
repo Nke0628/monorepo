@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@repo/ui/button";
+import { Button as ChakraButton } from "@chakra-ui/react";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -52,6 +53,9 @@ export default function Home() {
         >
           Open alert
         </Button>
+        <ChakraButton colorPalette="blue" size="lg">
+          Chakra UI Button
+        </ChakraButton>
       </main>
       <footer className={styles.footer}>
         <a

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.34.0",
+    "@emotion/react": "^11.14.0",
     "@repo/ui": "workspace:*",
     "@sentry/nextjs": "^8.28.0",
     "next": "15.0.0-rc.0",
