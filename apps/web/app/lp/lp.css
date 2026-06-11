@@ -1,0 +1,148 @@
+/* アニメーション定義 */
+@keyframes lp-fade {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  30% { opacity: 1; }
+  45% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes lp-slide-left {
+  0% { transform: translateX(-50%); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes lp-slide-right {
+  0% { transform: translateX(150%); }
+  100% { opacity: 1; transform: translateX(100%); }
+}
+@keyframes lp-balloon {
+  0% { transform: scale(0.1); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes lp-fall {
+  0% { background-position: 0 0; }
+  100% { background-position: -700px 700px; }
+}
+
+/* アニメーション適用クラス（IntersectionObserverからのトリガー用） */
+.slide-left {
+  animation: lp-slide-left 0.5s ease-out 0s 1 forwards;
+}
+.slide-right {
+  animation: lp-slide-right 0.5s ease-out 0s 1 forwards;
+}
+.balloon {
+  animation: lp-balloon 0.5s ease-out 0s 1 forwards;
+}
+
+/* フェードスライド */
+.lp-fade-item {
+  animation: lp-fade 15s infinite;
+}
+.lp-fade-item:nth-child(1) { animation-delay: 0s; }
+.lp-fade-item:nth-child(2) { animation-delay: 5s; }
+.lp-fade-item:nth-child(3) { animation-delay: 10s; }
+
+/* メインビジュアル画像の白ぼかし枠 */
+.lp-fade-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: inset 0px 0px 20px 20px #fff;
+}
+
+/* 落下アニメーション背景 */
+.lp-fall-bg {
+  animation: lp-fall 10s infinite linear;
+}
+
+/* セクションタイトル下線 */
+.lp-section-title {
+  position: relative;
+}
+.lp-section-title::after {
+  content: "";
+  width: 100px;
+  height: 3px;
+  background-color: #333;
+  display: block;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+/* メインビジュアルのCTAボタン矢印 */
+.lp-mv-btn::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-top: solid 3px #fff;
+  border-right: solid 3px #fff;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 26px;
+  right: 30px;
+}
+
+/* ナビメニューのボタン装飾 */
+.lp-navi-btn::after {
+  content: "";
+  width: 250px;
+  border-right: solid 1px #fff;
+  border-bottom: solid 1px #fff;
+  padding: 15px 0;
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+}
+
+/* 吹き出し矢印（左向き） */
+.lp-balloon-left::before {
+  content: "";
+  position: absolute;
+  top: 60%;
+  left: 0;
+  margin-left: -30px;
+  border: 15px solid transparent;
+  border-right: 15px solid #e9f1fb;
+}
+
+/* 吹き出し矢印（右向き） */
+.lp-balloon-right::before {
+  content: "";
+  position: absolute;
+  top: 60%;
+  right: 0;
+  margin-right: -30px;
+  border: 15px solid transparent;
+  border-left: 15px solid #e9f1fb;
+}
+
+/* レスポンシブ: 吹き出し矢印を下向きに変更 */
+@media screen and (max-width: 900px) {
+  .lp-balloon-left::before,
+  .lp-balloon-right::before {
+    top: 100%;
+    left: 50%;
+    right: auto;
+    margin-left: -15px;
+    margin-right: 0;
+    border: 15px solid transparent;
+    border-top: 15px solid #e9f1fb;
+    border-right: none;
+    border-left: none;
+  }
+
+  @keyframes lp-slide-left {
+    0% { transform: translateX(-100%); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes lp-slide-right {
+    0% { transform: translateX(100%); }
+    100% { opacity: 1; transform: translateX(16px); }
+  }
+}

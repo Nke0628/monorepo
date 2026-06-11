@@ -1,0 +1,64 @@
+@keyframes loading-rotate1 {
+  0%   { transform: translate(-50%, -50%) rotate(0); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes loading-rotate2 {
+  0%   { transform: translate(-50%, -50%) rotate(0); }
+  100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+@keyframes loading-blur-text {
+  0%   { filter: blur(0px); }
+  100% { filter: blur(4px); }
+}
+
+/* 外側リングの疑似要素 */
+.loading-outer::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 100px;
+  height: 200%;
+  background: #222;
+  animation: loading-rotate2 30s infinite linear;
+}
+
+/* 中間リングの疑似要素 */
+.loading-middle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-53%, -50%);
+  width: 106%;
+  height: 100px;
+  background: #222;
+  animation: loading-rotate2 10s infinite linear;
+}
+.loading-middle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -53%);
+  width: 100px;
+  height: 106%;
+  background: #222;
+  animation: loading-rotate1 15s infinite linear;
+}
+
+/* 内側リングの疑似要素 */
+.loading-inner::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  width: 40px;
+  height: 110%;
+  background: #222;
+  animation: loading-rotate1 8s infinite linear;
+}
